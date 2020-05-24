@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Radio from '@material-ui/core/Radio'
 import './main.scss'
+import Loader from 'react-loader-spinner'
 
 const WeekContainer = () => {
   const API_KEY = '0063b112cbe6139b682874db48760936'
@@ -17,7 +18,11 @@ const WeekContainer = () => {
     ).then(({ data }) => setWeather(data))
   }, [city, changeUnit])
   if (weatherr.main === undefined || weatherr.weather === undefined) {
-    return <div>Loading . . .</div>
+    return (
+      <div className="flex items-center justify-center mt-20">
+        <Loader type="Rings" color="#00BFFF" height={200} width={200} timeout={5000} />
+      </div>
+    )
   }
   if (weatherr.code === 200) {
     return <div>City not found</div>
