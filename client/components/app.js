@@ -15,17 +15,17 @@ const WeekContainer = () => {
   useEffect(() => {
     axios(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${changeUnit}&appid=${API_KEY}`
-    ).then(({ data }) => setWeather(data))
-  }, [city, changeUnit])
-  if (weatherr.main === undefined || weatherr.weather === undefined) {
+    ).then(({ data }) => {
+      setWeather(data)
+      userValue('')
+    })
+  }, [city, changeUnit, userValue])
+  if (weatherr.main === undefined) {
     return (
       <div className="flex items-center justify-center mt-20">
         <Loader type="Rings" color="#00BFFF" height={200} width={200} timeout={5000} />
       </div>
     )
-  }
-  if (weatherr.code === 200) {
-    return <div>City not found</div>
   }
   return (
     <div className=" max-h-full ...">
